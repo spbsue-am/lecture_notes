@@ -42,6 +42,13 @@
 \usepackage{tabularx}
 
 
+%\usepackage{algorithm}
+\usepackage[ruled,vlined]{algorithm2e}
+
+\SetKwInput{KwInput}{Input}                % Set the Input
+\SetKwInput{KwOutput}{Output}              % set the Output
+
+
 % tikz graphics
 % Для коммутативных диаграмм.
 \usepackage{tikz}
@@ -99,8 +106,8 @@
 
 
 % Title
-\title{Математические модели микро- и макроэкономики.\\ Лекции.\\ ЧЕРНОВИК}
-\author{Лектор: Placeholder\\ Автор конспекта: Курмазов Ф.А.\thanks{f.kurmazov.b@gmail.com}}
+\title{Прикладные модели исследования операций.\\ Лекции.\\ ЧЕРНОВИК}
+\author{Лектор: Чернов В.П.\\ Автор конспекта: Курмазов Ф.А.\thanks{f.kurmazov.b@gmail.com}}
 \date{\today}
 
 
@@ -270,4 +277,28 @@
 		x \in \{0, 1\}^{|E|} &
 	\end{cases}
 	$$
+
+	% Пример алгоритма
+
+	\begin{algorithm}[H]
+		\SetAlgoLined
+		 \SetKwFunction{FDFS}{DFS}
+		 \SetKwProg{Fn}{Function}{:}{}
+		 \Fn{\FDFS{$u$}}{
+			$VisitFunc(u)$\;
+			$visited[u] = True$\;
+		        \For{$w \in \text{adj}[u]$}
+						{
+							\If{$visited[w] = False$}
+								{
+								$FoundFunc(w)$\;
+								$\text{DFS}(w)$\;
+								}						
+							}
+			$OutFunc(u)$\;
+		        }
+
+		DFS(start)
+		\caption{Depth-first search}
+	\end{algorithm}
 
