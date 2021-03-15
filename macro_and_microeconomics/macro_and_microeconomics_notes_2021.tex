@@ -17,7 +17,6 @@
 \renewcommand{\baselinestretch}{1.2}
 \sloppy
 
-
 % Languages, fonts and symbols
 \usepackage[english,russian]{babel}
 \usepackage[T1,T2A]{fontenc}
@@ -25,6 +24,8 @@
 \usepackage{titlesec}
 
 \usepackage{amsmath}
+
+\usepackage{array}
 
 \usepackage{graphicx}
 \graphicspath{{images/}} 
@@ -356,7 +357,7 @@
 	
 	\subsection{Организационные моменты.}
 	
-	КТ1 27 марта, КТ2 где-то в мае.
+	КТ1 3 апреля, КТ2 где-то в мае.
 	
 	\subsection{Оптимизационные задачи.}
 	
@@ -510,7 +511,248 @@
 	\end{cases}
 	$$
 	
+	\bigskip
+	
+	\begin{exmp}
+		$$\begin{cases}
+			x\,p_x + y\,p_y &\rightarrow \min\\
+			
+			x^\alpha\,y^\beta& \geq \bar{U}
+		\end{cases}$$
+		
+		$L(x,y)=-p_x x p_y y - \lambda (x^\alpha y^\beta - \bar{U})$
+		
+		$\begin{cases}
+			L'_x=-p_x - \alpha x^{\alpha - 1} y^\beta \lambda =0\\
+			
+			L'_y=-p_y - \alpha y^{\beta - 1} x^\alpha \lambda =0
+		\end{cases}$
+		
+		$\begin{cases}
+			- \alpha x^{\alpha - 1} y^\beta \lambda = p_x\\
+			
+			- \alpha y^{\beta - 1} x^\alpha \lambda = p_y
+		\end{cases}$\\ 
+		
+		Делим $L'_x$ на $L'_y$:
+		
+		$\dfrac{\alpha y}{\beta x} = \dfrac{p_x}{p_y}$
+		
+		$y=\dfrac{p_x}{p_y} \dfrac{\beta}{\alpha} x$\\
+		
+		Подставим в ограничение:
+		
+		$x^\alpha \cdot \left(\dfrac{p_x}{p_y} \dfrac{\beta}{\alpha} x \right)^\beta = \bar{U}$
+		
+		$x^{\alpha + \beta} = \dfrac{\bar{U}}{\left(\dfrac{p_x}{p_y} \dfrac{\beta}{\alpha} \right)^\beta}$\\
+		
+		Откуда:
+		
+		$$x^* = \bar{U}^{\dfrac{1}{\alpha + \beta}} \left(\dfrac{p_y}{p_x} \dfrac{\alpha}{\beta} \right)^{\dfrac{\beta}{\alpha + \beta}}$$  
+		
+		$$y^* = \bar{U}^{\dfrac{1}{\alpha + \beta}} \left(\dfrac{p_x}{p_y} \dfrac{\beta}{\alpha} \right)^{\dfrac{\alpha}{\alpha + \beta}}$$
+				
+		
+	\end{exmp}
+	
+	\newpage
+	
 	\section{Лекция 4.}
+	
+	\subsection{Модели увеличения полезности и минимизации издержек}
+	
+	
+	\begin{table}[h!] 
+		
+		\centering
+		\begin{tabular}{c|c}
+		
+		 $ p_x x + p_y y \rightarrow \min\limits_{x,y \in\mathds{R}_{\geq 0}}$ & $ U(x,y)=x^\alpha y^\beta \rightarrow \max\limits_{x,y \in\mathds{R}_{\geq 0}} $ \\
+		 
+		$ \textbf{s.t.} \, x^\alpha y^\beta \geq \bar{U} $ & $ \textbf{s.t.} \, p_x x + p_y y \leq m $\\ \hline
+		
+		\\
+		
+		$ \begin{cases} 
+			h_x(\textbf{p},\bar{U}) = \bar{U} \left( \dfrac{p_y}{p_x} \dfrac{\alpha}{\beta} \right)^\beta \\ 
+			h_y(\textbf{p},\bar{U}) = \bar{U} \left( \dfrac{p_x}{p_y} \dfrac{\beta}{\alpha} \right)^\alpha
+		\end{cases}
+		$
+		&
+		$ \begin{cases} 
+			x^* =  \dfrac{\alpha m}{p_x} \\ 
+			y^* =  \dfrac{\beta m}{p_y} 
+		\end{cases}
+		$
+		\\
+		
+		$\bar{U} \cdot \dfrac{p_x^\alpha p_y^\beta}{\alpha^\alpha \beta^\beta} = e^*$
+		&
+		$m \cdot \dfrac{\alpha^\alpha \beta^\beta}{p_x^\alpha p_y^\beta} = U(x^*,y^*) = V(\textbf{p},m)$
+		\\
+		
+		&$U(x^*,y^*)$ -- косвенная функция полезности
+		
+		\end{tabular}
+	
+	\end{table}
+	
+	*При $\alpha + \beta = 1$
+	
+	Подставляем $V$ в $e^*$:
+	
+	$$e^* = m \cdot \dfrac{\alpha^\alpha \beta^\beta}{p_x^\alpha p_y^\beta} \dfrac{p_x^\alpha p_y^\beta}{\alpha^\alpha \beta^\beta} = m $$
+	
+	Так же равен и спрос
+	
+	$$x^* = \bar{U} \cdot \dfrac{p_x^\alpha p_y^\beta}{\alpha^\alpha \beta^\beta} \cdot \dfrac{\alpha}{p_x} = \bar{U} \left( \dfrac{p_y}{p_x} \dfrac{\alpha}{\beta} \right)^\beta$$
+	
+	Таким образом, когда $m = e$:
+	
+	$x(\textbf{p},m)=x(\textbf{p},e(\textbf{p},\bar{U})) = h_x (\textbf{p},\bar{U})$
+	
+	$h_x (\textbf{p},\bar{U}) = h_x(\textbf{p},V(\textbf{p},m)) = x(\textbf{p},m)$
+	
+	\subsection{Свойства функции спроса по Хиксу}
+	
+	$$e^* = \bar{U} \cdot \dfrac{p_x^\alpha p_y^\beta}{\alpha^\alpha \beta^\beta}$$
+	
+	$$h_x(\textbf{p},\bar{U}) = \bar{U} \left( \dfrac{p_y}{p_x} \dfrac{\alpha}{\beta} \right)^\beta$$ 
+	
+	\begin{itemize}
+		\item Однородность нулевой степени по ценам\footnote{Однородность $k$ степени: $g(\gamma \textbf{x})=\gamma^k f(\textbf{x})$}
+		
+		$h_x(\gamma \textbf{x},\bar{U}) = \bar{U} \left(\dfrac{\gamma p_y \alpha}{\gamma p_x \beta} \right)y^\beta = \bar{U} \left(\dfrac{p_y \alpha}{p_x \beta} \right)y^\beta = h_x(\textbf{x},\bar{U})$ 
+		\\
+		 
+		\item Лемма Шепарда 
+		
+		Частная производная функция расходов по конкретной цене равна конкретному спросу по Хиксу
+		
+		$$\dfrac{\delta e^*}{\delta p_x} = \bar{U} \left(\dfrac{\alpha p_y^\beta}{p_x^\beta \alpha^\alpha \beta^\beta} \right) = \bar{U} \left( \dfrac{p_y}{p_x} \dfrac{\alpha}{\beta} \right)^\beta = h_x(\textbf{p},\bar{U})$$ 
+		
+		\item Для спроса по Хиксу работает закон спроса
+		
+		$$\dfrac{\delta h_i}{\delta p_i} \leq 0$$ \\
+		
+		\textbf{Доказательство}
+		
+		$$\textbf{p} \, h(\textbf{p},\bar{U}) \rightarrow \min\limits_{x,y \in\mathds{R}_{\geq 0}}$$
+		$$ \textbf{s.t.} \, U(h(\textbf{p}, \bar{U} )) \geq \bar{U} $$
+		
+		где $\textbf{p} = [p_1,p_2, \dots, p_n]$, $p_i \in\mathds{R}_{\geq 0}$ 
+		
+		и $h^*(\textbf{p},\bar{U})$ -- решение задачи\\
+		
+		Eсли же вектор цен: $\textbf{p} + \Delta = [p_1 + \Delta_1,p_2 + \Delta_2, \dots, p_n + \Delta_n]$
+		
+		$$(\textbf{p} + \Delta) \, h(\textbf{p} +\Delta,\bar{U}) \rightarrow \min\limits_{x,y \in\mathds{R}_{\geq 0}}$$
+		$$ \textbf{s.t.} \, U(h(\textbf{p} +\Delta, \bar{U} )) \geq \bar{U} $$
+		
+		и решение задачи -- $h^*(\textbf{p} +\Delta,\bar{U})$\\
+		
+		$\Delta h = h^*(\textbf{p} +\Delta,\bar{U}) - h^*(\textbf{p},\bar{U})$
+		
+		Предположим, что цена на один товар возросла: $\Delta_i > 0, \Delta_{j \neq i} = 0$, и проанализируем издержки.
+		
+		$\textbf{p} \, h^*(\textbf{p},\bar{U}) \leq \textbf{p} \, h(\textbf{p},\bar{U}) \Rightarrow \textbf{p} h^*(\textbf{p},\bar{U}) \leq \textbf{p}\, h^*(\textbf{p} + \Delta,\bar{U})$
+		
+		$(\textbf{p}+\Delta) \, h^*(\textbf{p}+\Delta,\bar{U}) \leq (\textbf{p}+\Delta) \, h(\textbf{p}+\Delta,\bar{U}) \Rightarrow (\textbf{p}+\Delta) h^*(\textbf{p}+\Delta,\bar{U}) \leq (\textbf{p}+\Delta) \, h(\textbf{p},\bar{U})$
+		
+		Откуда
+		
+		$$
+		\text{s.t.}
+		\begin{cases}
+			\textbf{p}h^*(\textbf{p},\bar{U}) \leq \textbf{p} h^*(\textbf{p} + \Delta,\bar{U})\\
+			
+			(\textbf{p}+\Delta) h^*(\textbf{p}+\Delta,\bar{U}) \leq (\textbf{p}+\Delta) h(\textbf{p},\bar{U})
+		\end{cases}
+		$$
+		
+		Сложим два неравенства
+		
+		$\textbf{p}h^*(\textbf{p},\bar{U}) + (\textbf{p}+\Delta) \, h^*(\textbf{p}+\Delta,\bar{U}) \leq \textbf{p} \, h^*(\textbf{p} + \Delta,\bar{U}) + (\textbf{p}+\Delta) \, h(\textbf{p},\bar{U})$
+		
+		$\textbf{p} (h^*(\textbf{p},\bar{U}) - h^*(\textbf{p} + \Delta,\bar{U})) - (\textbf{p}+\Delta) (h(\textbf{p},\bar{U}) - h^*(\textbf{p}+\Delta,\bar{U})) \leq 0$
+		
+		$- \Delta (h(\textbf{p},\bar{U}) - h^*(\textbf{p}+\Delta,\bar{U})) \leq 0$
+		
+		Отсюда следует $h_i(\textbf{p},\bar{U}) \geq h_i^*(\textbf{p}+\Delta,\bar{U})$
+	\end{itemize}
+	
+	
+	\newpage
+	
+	\section{Лекция 5.}
+	
+	\subsection{Задачки}
+	
+	\begin{exc}
+		$$x p_x+y p_y \rightarrow \min\limits_{x,y,\geq 0}$$
+		
+		$$
+		\text{s.t.}
+		\begin{cases}
+			\min\{\alpha x,y\} \geq \bar{U}
+		\end{cases}
+		$$
+		
+		$\alpha x = y = \bar{U}$
+		
+		$x^* = \dfrac{\bar{U}}{\alpha}$
+		
+		$y^* = \bar{U}$
+		
+		$e(p_x,p_y,h_1(\textbf{p},\bar{U}),h_2(\textbf{p},\bar{U})) = p_x \frac{\bar{U}}{\alpha} + p_y \bar{U} = \bar{U}(\dfrac{p_x}{\alpha} + p_y)$
+	\end{exc}
+
+	\begin{exc}
+		$$\min\{\alpha x,y\} \rightarrow \max\limits_{x,y,\geq 0}$$
+		
+		$$
+		\text{s.t.}
+		\begin{cases}
+			x p_x+y p_y \leq m
+		\end{cases}
+		$$
+		
+		$x^* = \dfrac{m}{p_x + \alpha p_y}$
+		
+		$y^* = \dfrac{\alpha m}{p_x + \alpha p_y}$
+		
+		$ u(x^*,y^*)=\min\{\dfrac{m}{p_x + \alpha p_y},\dfrac{\alpha m}{p_x + \alpha p_y}\} = \dfrac{m}{p_x + \alpha p_y}$
+	\end{exc}
+	
+	\subsection{Эффект дохода и эффект замещения}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.65\textwidth]{ЭффектДоходаИЗамещения}
+	\end{figure}
+
+	\begin{exmp}
+		
+		$x=10+\dfrac{m}{10 p_1}$; $m=120$; $p_1 =3$
+		
+		$X_1 = 10 + \dfrac{120}{10 \cdot 3} = 14$
+		
+		При снижении цены $p_1 = 2$. Таким образом теперь потребление составит $X_2 =10+\dfrac{120}{10 \cdot 2} = 16$.
+		
+		Но существует промежуточный уровень, который называется эффектом замены.
+		
+		Цена снизилась, но мы хотим оставить прошлый набор благ, для этого нам необходимо изменить наш доход. $\Delta m = m' - m = X_1 p'_1 - X_1 p_1 = X_1 (p'_1 - p_1) = -14$. То есть наш доход теперь будет $m' = 120 - 14 = 106$, а потребление $X_3 = 10 + \dfrac{106}{2 \cdot 10} = 15.3$. Эффект замещения $15.3-14=1.3$.
+		
+		*$\Delta m$ - компенсационная вариация по Слуцкому(на рисунке $A A_1$), т.е. доход отнимается или добавляется в той мере, в какой новый уровень денежного дохода может обеспечить прежний набор благ. 
+		
+		**В модели Хикса (компенсационная вариация по Хиксу) компенсирующий доход позволяет потребителю после изменения цен сохранить прежний уровень удовлетворенности (при другом по структуре товарном наборе на той же кривой безразличия).
+		
+		Эффект замещения (на рисунке $X_1 X_3$) говорит о том, что так как цена на первый товар упала, потребитель начинает покупать этого товара больше, но за счет снижения потребления второго товара. 
+		
+		Но так как доход на самом деле остается на одном месте, существует эффект дохода (на рисунке $X_3 X_2$). $16-15.3=0.7$
+		
+	\end{exmp}
+	
 	
 \end{document}
 
