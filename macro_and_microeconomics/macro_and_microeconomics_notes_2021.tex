@@ -24,6 +24,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage{titlesec}
 
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.9}
+
 \usepackage{amsmath}
 
 \usepackage{array}
@@ -742,17 +746,186 @@
 		
 		Но существует промежуточный уровень, который называется эффектом замены.
 		
-		Цена снизилась, но мы хотим оставить прошлый набор благ, для этого нам необходимо изменить наш доход. $\Delta m = m' - m = X_1 p'_1 - X_1 p_1 = X_1 (p'_1 - p_1) = -14$. То есть наш доход теперь будет $m' = 120 - 14 = 106$, а потребление $X_3 = 10 + \dfrac{106}{2 \cdot 10} = 15.3$. Эффект замещения $15.3-14=1.3$.
+		Цена снизилась, но мы хотим оставить прошлый набор благ, для этого нам необходимо изменить наш доход. $\Delta m = m' - m = X_1 p'_1 - X_1 p_1 = X_1 (p'_1 - p_1) = -14$. То есть наш доход теперь будет $m' = 120 - 14 = 106$, а потребление $X_3 = 10 + \dfrac{106}{2 \cdot 10} = 15.3$. Эффект замещения $15.3-14=1.3$. 
+		
+		Эффект замещения (на рисунке $X_1 X_3$) говорит о том, что так как цена на первый товар упала, потребитель начинает покупать этого товара больше, но за счет снижения потребления второго товара. 
+		
+		Но так как доход на самом деле остается на одном месте, существует эффект дохода (на рисунке $X_3 X_2$). $16-15.3=0.7$ \\ 
 		
 		*$\Delta m$ - компенсационная вариация по Слуцкому(на рисунке $A A_1$), т.е. доход отнимается или добавляется в той мере, в какой новый уровень денежного дохода может обеспечить прежний набор благ. 
 		
 		**В модели Хикса (компенсационная вариация по Хиксу) компенсирующий доход позволяет потребителю после изменения цен сохранить прежний уровень удовлетворенности (при другом по структуре товарном наборе на той же кривой безразличия).
 		
-		Эффект замещения (на рисунке $X_1 X_3$) говорит о том, что так как цена на первый товар упала, потребитель начинает покупать этого товара больше, но за счет снижения потребления второго товара. 
-		
-		Но так как доход на самом деле остается на одном месте, существует эффект дохода (на рисунке $X_3 X_2$). $16-15.3=0.7$
-		
 	\end{exmp}
+	\newpage
+	
+	\section{Лекция 6.}
+	
+	\subsection{Задачки}
+	
+	\begin{exc}
+		$$U(c,l)=\ln c \cdot \ln l \rightarrow \max\limits_{c,l,\geq 0}$$
+		
+		$$
+		\text{s.t.}
+		\begin{cases}
+			n_r + n_s + l = 24 \\
+			
+			c \leq 4 n_s^{0.5} + w n_r
+		\end{cases}
+		$$
+		
+		$$
+		\text{s.t.}
+		\begin{cases}
+			n_r + n_s + l = 24\\
+			
+			c \leq 4 n_s^{0.5} + w (24 -n_s-l)
+		\end{cases}
+		$$
+		
+		Решение через Лагранжа или предельные полезности, также можно подставить в $U$ наше ограничение (со знаком равно)
+		
+	\end{exc}
+	
+	\begin{exc}
+		$$U(x,y)=(x^\rho + y^\rho)^{1/\rho} \max\limits_{x,y,\geq 0}$$
+		
+		$$
+		\text{s.t.}
+		\begin{cases}
+			p_x x + p_y y \leq m \\
+			
+			\rho < 1
+		\end{cases}
+		$$
+		
+		$MU(x) = x^{\rho-1} (x^\rho + y^\rho)^{\frac{1}{\rho}-1}$
+		
+		$MU(y) = y^{\rho-1} (x^\rho + y^\rho)^{\frac{1}{\rho}-1}$
+		
+		$$\dfrac{MU(x)}{MU(y)} = \left( \dfrac{x}{y}\right)^{\rho-1} = \dfrac{p_x}{p_y}$$
+		
+		$$x = \left( \dfrac{y^{\rho-1} p_x}{p_y}\right)^{\dfrac{1}{\rho-1}} = y \left( \dfrac{p_x}{p_y}\right)^{\dfrac{1}{\rho-1}}$$
+		
+		$$m = p_x \left( \dfrac{p_x}{p_y}\right)^{\dfrac{1}{\rho-1}} y + p_y y$$
+		
+		$$y=m \left(\dfrac{1}{p_x^{\frac{\rho}{\rho-1}} p_y^{- \frac{1}{\rho-1}} + p_y}\right)$$
+				
+		$$y^*(p_x,p_y) = m \left( \dfrac{p_y^{\dfrac{1}{\rho-1}}}{p_x^{\dfrac{\rho}{\rho-1}}+p_y^{\dfrac{\rho}{\rho-1}}}\right)$$
+		
+		$$x^*(p_x,p_y) = y^*(p_x,p_y)$$	% p_y ????
+		
+		$$U(x,y) = \min\{x,y\} \rightarrow \max\limits_{x,y,\geq 0}$$
+		
+		$$x^*=y^*=\dfrac{m}{p_x+p_y}$$
+		
+		$$\lim_{\rho \rightarrow - \infty} m \left( \dfrac{p_y^{\dfrac{1}{\rho-1}}}{p_x^{\dfrac{\rho}{\rho-1}}+p_y^{\dfrac{\rho}{\rho-1}}}\right)$$
+		
+		$$f=\ln(U(x,y)) = \dfrac{\ln(x^\rho + y^\rho)}{\rho}$$
+		
+		$$\lim_{\rho \rightarrow 0} \dfrac{\ln(x^\rho + y^\rho)}{\rho} =\lim_{\rho \rightarrow 0} \dfrac{x^\rho \ln x +y^\rho \ln y}{x^\rho + y^\rho} = \lim_{\rho \rightarrow 0} \dfrac{\ln x \cdot \ln y}{2}$$
+		
+		$e^f=\sqrt{xy}$
+		
+	\end{exc}
+
+	\begin{exc}
+		$\dfrac{\delta^2 e}{\delta p_j \delta u} > 0 \Rightarrow E_x^m = \dfrac{\delta x}{\delta m} \geq 0$
+		
+		$e(\textbf{p},U)=\textbf{p}^T h(\textbf{p},U)$
+		
+		$\dfrac{\delta^2 e(\textbf{p},U)}{\delta p_j} = h_j(\textbf{p},U) + p_j \dfrac{\delta h_j}{\delta p_j} = h_j(\textbf{p},U) = h_j(\textbf{p},U)$
+		
+		$\dfrac{\delta^2 e}{\delta p_j \delta U} = \dfrac{\delta h_j(\textbf{p},U)}{\delta U}$
+		
+		$h^* (\textbf{p},U) = x^*(\textbf{p},m)$
+		
+		$U(\textbf{p},x^)=U(\textbf{p},x^*(\textbf{p},m))=V(\textbf{p},m)$
+		
+		$h^*(\textbf{p},V(\textbf{p},m))=x^*(\textbf{p},m)$
+		
+		$\dfrac{\delta x}{\delta m} \stackrel{?}{>} 0$
+		
+		$\dfrac{h^*}{V} * \dfrac{\delta V}{\delta m} =$ Первый множитель $>0$ по условию, второй из-за того, что $V$ растет с ростом $m$. $\Rightarrow \dfrac{\delta x}{\delta m} > 0$
+		
+	\end{exc}
+
+	\begin{exc}
+		$U(X,Y)= X^\alpha Y^{1-\alpha}$ -- постоянная отдача от масштаба
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.65\textwidth]{ЭффектДоходаИЗамещения}
+		\end{figure}
+		
+		$E_1$ -- изначальное решение $E_1=(X_1,Y_1)$
+		
+		$p_1^n$ -- новая цена, $p_1>p_1^n$
+		
+		$E_2$ -- новое решение $E_2=(X_2,Y_2)$
+		
+		$E_3$ -- промежуточная точка эффекта дохода-замещения
+		
+	\textbf{Задача} Для функции Коба-Дугласа $Y_1 == Y_2$ \\
+	
+	Если мы имеем Леонтьевскую функцию, тогда эффекта замещение не будет
+	
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+				axis x line=bottom,
+				axis y line=left,
+				xmax = 240,
+				ymax=240,
+				width = 170,
+				height = 170,
+				xtick=\empty,
+				ytick=\empty,
+				extra y ticks={200,240},
+				extra y tick labels={$\frac{m}{p_2}$,$Y$},
+				extra x ticks={120,200,240},
+				extra x tick labels={$\frac{m}{p_2}$,$\frac{m}{p_2^n}$,$X$}
+				]
+				\addplot[red, mark = none] coordinates {
+					(0, 200)
+					(120,0)};
+				
+				\addplot[orange, mark = none] coordinates {
+					(0, 200)
+					(200,0)};
+				
+				\addplot[orange, mark = none] coordinates {
+					(0, 150)
+					(150,0)};
+				
+				\addplot[blue, mark = none] coordinates {
+					(75, 200)
+					(75,75)
+					(200,75)};
+				
+				\addplot[blue, mark = none] coordinates {
+					(100, 200)
+					(100,100)
+					(200,100)};
+				
+				\addplot[red, only marks] coordinates {
+					(100, 100)
+				};
+				
+				\addplot[red, only marks] coordinates {
+					(75, 75)};
+				
+				\node[pin=165:{$E_1$}] at (axis cs:75,75) {};
+				
+				\node[pin=65:{$E_2$}] at (axis cs:100,100) {};
+			\end{axis}
+		\end{tikzpicture} 
+	
+	\end{center}
+	
+	\end{exc}
+	
 	
 	
 \end{document}
