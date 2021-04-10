@@ -926,7 +926,150 @@
 	
 	\end{exc}
 	
+	\newpage
 	
+	\section{Лекция 7.}
+	
+	\subsection{Задача максимизации прибыли}
+	
+	$$PMP = pf(x) - wx \rightarrow \max\limits_{x\geq 0}$$
+	
+	\begin{itemize}
+		\item $x$ -- факторы производства 
+		
+		\item $f(x)$ -- выпуск
+		
+		\item $p$ -- цены на изготавливаемую продукцию
+		
+		\item $p f(x)$ -- доходы
+		
+		\item $w$ -- цены на факторы производства
+		
+		\item $wx$ -- издержки
+	\end{itemize}
+	
+	$$CMP = \sum w^T x \rightarrow \min\limits_{x\geq 0}$$
+	
+	$$
+	\text{s.t.}
+	\begin{cases}
+		f(x) \geq q
+	\end{cases}
+	$$
+	
+	$wx^* = C(q,w)$
+	
+	$$pq - C(q,w) \rightarrow \max\limits_q$$
+	
+	\begin{exmp} 
+		
+		Пусть $f(z) = \alpha z$, тогда: 
+		
+		$$PMP = p \alpha z - wz \rightarrow \max\limits_{z\geq 0}$$
+		
+		$FOC[z]: p \alpha = w$
+		
+		Если $p \alpha = w. \Rightarrow MR$(предельные доходы)$ = MC$(предельные издержки) $\rightarrow \pi (p,w) = p \alpha z - wz, \, z^*$-- любоe
+		
+		Если $p \alpha > w. \Rightarrow MR > MC \rightarrow \pi (p,w) \rightarrow \infty , z^* \rightarrow \infty \Rightarrow$ решения нет
+		
+		Если $p \alpha < w. \Rightarrow MR < MC \rightarrow \pi (p,w) = 0 , z^* = 0$
+		
+		Либо решаем через Лагранжа:
+		
+		$L =  p \alpha z - wz - \lambda (-z) =  p \alpha z - wz + \lambda z$
+		
+		$
+		\begin{cases}
+			FOC[z] \\
+			
+			\lambda z = 0
+		\end{cases}
+		$
+		
+	\end{exmp}
+	
+	\newpage
+	
+	\section{Лекция 8.}
+	
+	\subsection{Задачка}
+	$$f(x) = 100 x - x^2$$
+	
+	$$PMP = p(100 x - x^2) - w x \rightarrow \max\limits_{x\geq 0} $$
+	
+	$FOC[x] = 100p - w - 2 px=0$
+	
+	$x = \cfrac{-w+100p}{2p} = -\cfrac{w}{2p}+50$
+	
+	Добавляем условие
+	
+	$-\cfrac{w}{2p}+50 \geq 0$
+	
+	$w \leq 100p$
+	
+	$$
+	x^* = 
+	\begin{cases}
+		-\cfrac{w}{2p}+50 & \cfrac{w}{p} \leq 100 \\
+		0 & else
+	\end{cases}
+	$$
+	
+	Оптимальный выпуск тогда
+	
+	$$
+	q^* = 
+	\begin{cases}
+		100\left(-\cfrac{w}{2p}+50\right) - \left(-\cfrac{w}{2p}+50\right)^2 & \cfrac{w}{p} \leq 100 \\
+		0 & else
+	\end{cases}
+	$$
+	
+	А прибыль
+	
+	$\pi (w,p)=pq^*(w,p)-wx^*$
+	
+	$$
+	\pi^* (w,p) = 
+	\begin{cases}
+		p\left(100\left(-\cfrac{w}{2p}+50\right) - \left(-\cfrac{w}{2p}+50\right)^2\right)- w\left(-\cfrac{w}{2p}+50\right) & \cfrac{w}{p} \leq 100 \\
+		0 & else
+	\end{cases}
+	$$
+	
+	Лемма Хотеллинга: как изменится наша прибыль в зависимости от изменения цен или на готовую продукцию или на фактор производства.
+	$$\pi (p,w)=p^Tq^*-w^Tx^* = p^Tq^*-C(q^*,w)$$
+	
+	$$\cfrac{\delta \pi^*}{\delta p_i} = q_i^* \geq 0$$
+	
+	$$\cfrac{\delta \pi^*}{\delta w_i} = - x_i^* \leq 0$$
+	
+	При росте цен на изготавливаемую продукцию, нужно увеличивать производство, если  позволяют цены на факторы производства. Если сильно будут увеличиваться цены на факторы производства, то увеличивать производство нет смысла.
+	
+	\subsection{Равновесие на рынке}
+	
+	Фукция спроса: $q=D(p)$
+	
+	Потребитель хочет максимизировать свою полезность.
+	
+	$$u(x)-px \rightarrow \max$$
+	
+	$u'_x = p$
+	
+	Откуда $D(p)= x$. При наборе благ $D(p)= \sum_i x_i$.\\
+	
+	Фукция предложения: $q=\cfrac{p}{c(q)}$
+	
+	Производитель хочет максимизировать свою прибыль.
+	
+	$$pq-c(w,q) \rightarrow \max_q$$
+	
+	$c(w,q)'_q = q$
+	
+	Откуда $S(p)= q$. При наборе благ $S(p)= \sum_i q_i$.\\
+	
+	Равновесие: $D(p)$(спрос)$=S(p)$(предложению)
 	
 \end{document}
 
