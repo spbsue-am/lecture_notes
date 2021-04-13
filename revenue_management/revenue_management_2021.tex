@@ -1,0 +1,304 @@
+\documentclass[reqno]{article}
+
+\usepackage{fullpage}
+\usepackage{eufrak}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{enumitem}
+
+
+% \usepackage{nth}
+\usepackage{amsthm,amsmath,amsfonts,amssymb}
+
+
+%formatting
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+\renewcommand{\baselinestretch}{1.2}
+\sloppy
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.3em}
+
+
+% Languages, fonts and symbols
+\usepackage[english,russian]{babel}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+
+\usepackage{graphicx}
+
+\usepackage{subcaption}
+
+\usepackage{amssymb}
+
+\usepackage{listings}
+
+\usepackage{float}
+
+\usepackage{dsfont}
+
+\usepackage{ragged2e}
+
+\usepackage{tabularx}
+
+
+%\usepackage{algorithm}
+\usepackage[ruled,vlined]{algorithm2e}
+
+\SetKwInput{KwInput}{Input}                % Set the Input
+\SetKwInput{KwOutput}{Output}              % set the Output
+
+
+% tikz graphics
+% Для коммутативных диаграмм.
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes}
+\tikzstyle{vertex}=[circle,fill=black,minimum size=3pt,inner sep=0pt]
+\tikzstyle{edge} = [draw,thick,-]
+
+\usepackage{tikz-cd}
+
+\usetikzlibrary{quotes,babel,angles}
+
+
+% Теоремы и прочее
+\renewcommand\qedsymbol{$\square$}
+
+\theoremstyle{definition}
+\newtheorem*{nb}{Замечание}
+
+\theoremstyle{definition}
+\newtheorem*{sol}{Решение}
+
+\theoremstyle{definition}
+\newtheorem*{exmp}{Пример}
+
+\theoremstyle{definition}
+\newtheorem*{exmps}{Примеры}
+
+\theoremstyle{definition}
+\newtheorem{exc}{Упражнение}[section]
+
+\theoremstyle{definition}
+\newtheorem{thm}{Теорема}[section]
+
+\theoremstyle{definition}
+\newtheorem*{defi}{Определение}
+
+\theoremstyle{definition}
+\newtheorem{coll}{Следствие}[section]
+
+\theoremstyle{definition}
+\newtheorem{state}{Утверждение}[section]
+
+
+%Content as links
+% Для того, чтобы оглавление стало ссылками, убрать комментирование кода ниже.
+
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+   urlcolor=black
+}
+
+
+% Title
+\title{Управление доходами.\\ Лекции.\\ ЧЕРНОВИК}
+\author{Лектор: Фридман Г.М.\\  \\ Автор конспекта: Курмазов Ф.А.\thanks{f.kurmazov.b@gmail.com}}
+\date{\today}
+
+
+% New Symbols
+\newcommand*{\divby}{\mathrel{\rotatebox{90}{$\hskip-1pt.{}.{}.$}}}%
+
+
+
+
+\begin{document}
+
+	\setlength{\parindent}{0pt}
+
+	\maketitle
+
+	\tableofcontents
+
+
+	%%%%%
+	\newpage
+	\section{Лекция 1.}
+		%%%
+		\subsection{Введение в управление доходами.}
+			
+		Управление доходами (англ. Revenue Management) -- область исследования операций, занимающаяся преимущественно моделлированием и оптимизацией процессов, связанных с оптимизацией поведения производителя товаров/услуг на микро уровне. Основная цель -- продажа правильного товара, правильному покупателю, в правильном месте, в правильное время, с целью максимизации роста выручки. Таким образом область сочетает в себе методы оптимизации, математической статистики, микро- и макроэкономики.
+		
+		\textcolor{red}{Конечно, надо написать первую лекцию. Желательно тому, кто ее писал.}
+		
+		%%%
+		\subsection{Общая формулировка задачи определения оптимальной стратегии продаж авиакомпании.}
+			Авиакомпания предлагает на рынке O-D ряд продуктов, каждый из которых представляет собой комбинацию ``маршрут-класс билета'', где класс билета -- его цена. Спрос на каждый продукт, обычно, предсказывается заранее (вне данной модели), и обычно разбивается на несколько временных интервалов (DCP -- data collection periods).
+			
+			Авиакомпания хочет продавать все продукты таким образом, чтобы получить максимальных доход, учитывая при этом естественные ограничения вроде: заданный общий спрос, цена билетов, вместимость самолетов на рейсах, из которых состоят маршруты. Т.о. авиакомпания хочет найти оптимальную стратегию продаж, основанную на прогнозе спроса, физических ограничениях и реальном потоке запросов/покупателей.
+		
+		%%%
+		\subsection{Простейшая модель оптимизации стратегии продаж авиакомпании.}
+	
+		Заданы:
+		\begin{itemize}
+			\item Множество рейсов $Flights = [F]$\footnote{Здесь и далее, принята нотация $[n] = \{1, 2, 3, ... n\}$.}
+			\item Множество продуктов авикакопании $G = [N]$.
+			\item Вектор вместимости рейсов $cap \in \mathds{N}^F$
+			\item Продукт $i \in G$ состоит из маршрута $Path_i \subseteq Flights$, при чем связного (i.e. путь в графе терминалов), и некоторой стоимости $p_i$ (i.e. класс обслуживания).
+			\item Вектор стоимостей продуктов $p \in \mathds{N}^N$.
+			\item Вектор спрогнозированного спроса на продукты $d \in \mathds{N}^N$.
+		
+		\end{itemize}
+	
+		Цель задачи найти $x \in \mathds{N}^N$ -- количество продуктов каждого типа, которое компания разместит на рынке, максимизирующее выручку компании.
+		
+		Пусть $A$ -- матрица $N\times F$, в которой $a_{i, j} = 1$, если $i$-й рейс входит в $j$-й продукт (i.e. содержится в нем в качестве маршрута), и $a_{i, j} = 0$ иначе.
+		
+		Тогда линейная целочисленная программа соответствующая задаче может быть записана:
+		$$
+		\begin{cases}
+			p^T x &\rightarrow \max_x\\
+			A\,x  &\leq cap\\
+			x     &\leq d\\
+			x \in \{0, 1\}^N &
+		\end{cases}
+		$$
+	
+	%%%%%
+	\newpage
+	\section{Лекция 2.}
+		%%%
+		\subsection{Стохастические модели.}
+		
+		Шкалу времени можно разбить на периоды по DCP (англ. data collection points/periods) -- точкам, в которых компания может принимать управленческие решения.
+		
+		Главный недостаток детерминированной модели -- слабая описательная способность реальной ситуации, и негибкость во времени.
+		
+		При использовании прогноза на спрос важно знать точность этого прогноза, для анализа эффективности выработанной стратегии.
+		
+		Возможные стратегии продаж:
+		\begin{itemize}
+			\item Первый пришел - первый купил (англ. first come first served -- FCFS);
+			\item Оптимальная стратегия для одной начальной точки DCP (1DCP);
+			\item Оптимальная стратегия для четырех точек DCP (4DCP);
+		\end{itemize}
+	
+	
+		%%%
+		\subsection{Описание имитационной модели.}
+		
+		
+		Для имитации реального процесса продажи билетов можно принять поток запросов распределенным нормально, с параметрами $\mu = k_1 d_{i t}$, $\sigma = k_2 \sqrt{d_{i t}}$. Где $k_1$, $k_2$ -- ошибки прогноза мат. ожидания и ско соответственно.
+		
+		Для каждого периода и для каждого вида товара можно сгенерировать (имитация) свой поток запросов на покупку. Каждый такой запрос может быть удовлетворен или отклонен, в зависимости от выбранной стратегии.
+		
+		При каждом удовлетворении запроса требуется поддерживать естественные ограничения (т.е. уменьшать число оставшихся мест на рейсах).
+		
+		По результату работы имитационной модели можно оценить отношение полученной выручки (в результате выбранной стратегии) к максимальной выручке, доступной при данном потоке требований.
+		
+		
+		%%%
+		\subsection{Пределы бронирования.}
+		
+		Предел бронирования (англ. booking limit) $b$ -- количество билетов, которые мы готовы продать в данном ценовом классе.
+		
+		Пределы бронирования могут быть вложенными и невложенными.
+		
+		Вложенные пределы бронирования предполагают, что компания готова продать товар меньшей стоимости по стоимости более дорогого товара. Тем не менее, компания заранее ``ждет'' заданное количество ``богатых'' покупателей, в связи с чем резервирует для них билеты, и защищает их от покупки по меньшей стоимости.
+		
+		Уровень защиты $y$ (англ. protection levels) -- сколько билетов защищено в данном и более высоких ценовых классах.
+		
+		Для выбора уровня защиты можно оценивать ожидаемую выручку от $k$-го билета дорогого класса, и сравнивать ее с ожидаемой выручкой при продаже этого билета по меньшей стоимости, в зависимости от распределения количества заявок на покупку того или иного класса.
+		
+\end{document}
+
+
+
+% Examples and Shortcuts
+$
+	\begin{defi}
+	Определение чего-то
+	\end{defi}
+
+
+	\begin{thm}
+
+	\end{thm}	
+
+
+	\begin{coll}
+
+	\end{coll}	
+
+	
+	\begin{nb}
+
+	\end{nb}	
+
+	
+	\begin{nb}
+
+	\end{nb}	
+
+
+	\begin{exmp}
+
+	\end{exmp}	
+
+
+	\begin{tikzcd}
+	A \arrow[rd] \arrow[r, "\phi"] 
+	&B \\
+	& C \arrow[u]
+	\end{tikzcd}
+
+	% Пример мат. постановки
+
+	$$\text{min} \quad \sum\limits_{e \in E} x_e$$
+	
+	$$
+	\text{s.t.}
+	\begin{cases}
+		\sum\limits_{e \in E_v} x_e \geq 1& \forall v \in V\\
+		x \in \{0, 1\}^{|E|} &
+	\end{cases}
+	$$
+
+	% Пример алгоритма
+
+	\begin{algorithm}[H]
+		\SetAlgoLined
+		 \SetKwFunction{FDFS}{DFS}
+		 \SetKwProg{Fn}{Function}{:}{}
+		 \Fn{\FDFS{$u$}}{
+			$VisitFunc(u)$\;
+			$visited[u] = True$\;
+		        \For{$w \in \text{adj}[u]$}
+						{
+							\If{$visited[w] = False$}
+								{
+								$FoundFunc(w)$\;
+								$\text{DFS}(w)$\;
+								}						
+							}
+			$OutFunc(u)$\;
+		        }
+
+		DFS(start)
+		\caption{Depth-first search}
+	\end{algorithm}
+
+
+
+
+
+Случайное число, попадая в тот или иной промежуток будет характеризовать реализацию этого варианта.  Например, вероятность пессимистического варианта = 2/9; целевого = 6/9; оптимистического = 1/9. Если случайное число в интервале от 0 до 2/9, то поток вложений будет равен пессимистической величине вложений, если от 2/9 до 6/9, то целевому, если больше, то оптимистическому.
