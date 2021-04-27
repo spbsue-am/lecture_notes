@@ -231,10 +231,10 @@
 		
 		%%%%%
 		\newpage
-		\section{Лекция 3. Стохастические модели.}
+		\section{Лекция 3. Stochastic models I. Protection levels.}
 		
 		%%%
-		\subsection{Модель Литтлвуда для пределов бронирования.}
+		\subsection{Littlewood's rule.}
 		
 		Пример: при наличии 2-ух классов билетов, и при условии, что спрос на дешевый класс избыточен, можем положить, что спрос на дорогой класс имеет функцию распределения ${F}$. Тогда оценить количество мест, которое стоит зарезервировать под дррогой класс можно следующим образом:
 		
@@ -247,22 +247,27 @@
 		
 		EMSRb (Expected Marginal Set Revenue).
 		
+		...
 		
 		
 		%%%
 		\subsection{EMSRa.}
+		...
 		
-		
-		
+	
+	%%%%%
+	\newpage
+	\section{Лекция 4. Stochastic models II. Stochastic DLP.}
+			
 		%%%
-		\subsection{Stochastic DLP.}
+		\subsection{Probabilistic Non-Linear Problem (PNLP).}
 		
 		\begin{multicols}{2}
 			$$
 			\text{(DLP)}:
 			\begin{cases}
 				f^Tx \rightarrow \max & \\
-				Ax \leq cap & \\
+				Ax \leq Cap & \\
 				0 \leq x \leq \mathds{E}(\mathfrak{D}) & \\
 			\end{cases}	
 			$$
@@ -270,25 +275,137 @@
 			\columnbreak
 			
 			$$
-			\text{(stochastic DLP)}
+			\text{(PNLP)}
 			\begin{cases}
-				f^Tx \rightarrow \max & \\
-				Ax \leq cap & \\
-				0 \leq x \leq \mathds{E}(\mathfrak{D}) & \\
+				\sum\limits_{j=1}^n f_j \mathds{E}(\mathfrak{b_j}) \rightarrow \max & \\
+				Ax \leq Cap & \\
+				x \geq 0 & \\
 			\end{cases}
 			$$
 		\end{multicols}
+		
+		где $\mathfrak{D}$ -- спрос ($\mathfrak{D}_j$ -- спрос на $j$ продукт -- дискретная положительная случайная величина), $\mathds{E}$ -- мат. ожидание, $f \in \mathds{R}^N$ -- вектор цен, $A \in \{0, 1\}^{F x N}$ -- матрица маршрутов, $Cap \in \mathds{Z}^F$ -- вектор вместимости, $x$ -- переменная, обозначающая объемы продукции.
+		
+		Мы можем предположить, что нам известен закон распределения $\mathfrak{D}_j \sim F_j$, что эквивалентно тому, что известны $Pr[\mathfrak{D}_j = s]\,\forall\,s \in \{0, 1, 2, ...\}$.
+		
+		Интерпретируем переменную $x_j$ -- как количество товара $j$, которое мы хотим продать. Введем $b_j$ -- количество проданных билетов на продукт $j$, при условии выбраннго $x_j$. Таким образом $b_j$ -- дискретная случайная величина, которая принимает целочисленные значения от $0$ до $x_j$. На самом деле, $b_j = \min(x_j, \mathfrak{D}_j)$. Тогда можем выразить вероятность:
+		
+		$$
+		\begin{array}{l}
+			Pr[b_j = s] = Pr[\mathfrak{D}_j = s]\quad 0 \leq s < x_j \\
+			Pr[b_j = s] = Pr[\mathfrak{D}_j \geq x_j]\quad s = x_j
+		\end{array}
+		$$
+		
+		Откуда следует
+		
+		$$Pr[b_j \geq s] = Pr[\mathfrak{D}_j \geq s]\quad \forall\,0 \leq s \leq x_j$$
+		
+		$$Pr[b_j = x_j] = Pr[b_j \geq x_j] = Pr[\mathfrak{D}_j \geq x_j]$$
+		
+		Определение математического ожидания СВ $\xi$ со значениями в $\{0, 1, 2, 3, ..., n\}$:
+		
+		$$\mathds{E}[\xi] = \sum\limits_{s = 0}^S s\,Pr[\xi = s] = Pr[\xi = 1] + 2\,Pr[\xi = 2] + ... + S\,Pr[\xi = S]$$
+		
+		Перегруппируя члены можно получить формулу
+		
+		\begin{equation}
+			\mathds{E}[\xi] = \sum\limits_{s = 1}^S Pr[\xi \geq s]
+		\end{equation}
+		
+		
+		Тогда можно расписать математическое ожидание $b_j$:
+		
+		$$\mathds{E}[b_j] = \sum\limits_{s = 1}^{x_j} s\,Pr[b_j = s] = \sum\limits_{s = 1}^{x_j} Pr[b_j \geq s] = \sum\limits_{s = 1}^{x_j} Pr[\mathfrak{D}_j \geq s]$$
+		
+		Введем обозначения, и перепишем полученную формулу:
+		
+		$$P_{j,s} := Pr[\mathfrak{D}_j \geq s]\quad s = 1, 2, ..., x_j$$
+		
+		\begin{equation}
+			\mathds{E}[b_j] = \sum\limits_{s = 1}^{x_j} P_{js}
+		\end{equation}
+		
+		Тогда получим целевую функцию для (stochastic DLP):
+		
+		\begin{equation}
+			\sum\limits_{j=1}^n f_j \mathds{E}[b_j] = \sum\limits_{j=1}^n f_j \sum\limits_{s = 1}^{x_j} P_{j,s} \rightarrow \max
+		\end{equation}
 	
-	где $\mathfrak{D}$ -- спрос ($\mathfrak{D}_j$ -- спрос на $j$ продукт -- дискретная положительная случайная величина), $\mathds{E}$ -- мат. ожидание, $f \in \mathds{R}^N$ -- вектор цен, $A \in \{0, 1\}^{F x N}$ -- матрица маршрутов, $cap \in \mathds{Z}^F$ -- вектор вместимости, $x$ -- переменная, обозначающая объемы продукции.
+		Но работать с дискретными случайными величинами не всегда удобно. В связи с чем можно перейти к непрерывным распределениям случайных величин. В частности, можно предположить, что спрос распределен нормально:
 		
-	Мы можем предположить, что нам известен закон распределения $\mathfrak{D}_j \sim F_j$, что эквивалентно тому, что известны $P(\mathfrak{D}_j = s)\,\forall\,s \in \{0, 1, 2, ...\}$.
-	
-	Интерпретируем переменную $x_j$ -- как количество товара $j$, которое мы хотим продать. Введем $b_j$ -- количество проданных билетов на продукт $j$, при условии выбраннго $x_j$. Таким образом $b_j$ -- дискретная случайная величина, которая принимает целочисленные значения от $0$ до $x_j$.
+		$$\mathds{D}_j \sim \mathcal{N}(\mu_j, \sigma_j) \quad \forall\, j \in [N]$$
+		$$\mathcal{N}(\mu, \sigma, x) = \frac{1}{2}(1 + {erf}(\frac{x - \mu}{\sqrt{2}\sigma}))$$
+		
+		Переходим к аппроксимации дискретного распределения нормальным:
+		
+		$$P_{js} = Pr[\mathds{D}_j \geq s] \approx 1 - \mathcal{N}(\mu_j, \sigma_j, s)$$
+		$$\mathds{E}[b_j] = \sum\limits_{s = 1}^{x_j} (1 - \mathcal{N}(\mu_j, \sigma_j, s))$$
+		$$\sum\limits^n_{j = 1} f_j\,\mathds{E}[b_j] = \sum\limits^n_{j = 1} f_j\,\sum\limits_{s = 1}^{x_j} (1 - \mathcal{N}(\mu_j, \sigma_j, s))$$
+		
+		Но иметь переменный предел суммирования для задачи оптимизации не очень удобно. Теперь переформулируем задачу так, чтобы избавиться от верхнего предела суммирования. Введем наборы цепных бинарных переменных $x_{j,s}$ для $s = 1, 2, ... Cap$.
+		
+		$$
+		\begin{cases}
+			x_{j,s} =
+		\begin{cases}
+			1 & \text{для продукта j продали билет s}\\
+			0 & else\\
+		\end{cases} & \\
+		x_{j,s + 1} \leq x_{j, s}\quad \forall s \in [Cap - 1] & \\
+		\end{cases}
+		$$
+		
+		\textcolor{red}{Дальше (а может и перед) точно есть ошибки в индексах и в целом, перечитаю позже а пока у меня дедлайны.}
+		
+		С новой целевой функцией:
+		
+		$$\sum\limits^n_{j = 1} f_j \sum\limits^{\max Cap}_{s = 1} x_{j, s}\,(1 - \mathcal{N}(\mu_j, \sigma_j, s)) \rightarrow \max$$
+		
+		И новым ограничением вместимости:
+		
+		$$\sum\limits_{j : F_j \ni k} \sum\limits^{\max Cap}_{s = 1} x_{j, s} \leq Cap_k \quad \forall k \in [F]$$
+		
+		Откуда получим $0$-$1$ формулировку (stochastic DLP):
+		
+		$$
+		\text{(0-1 PNLP)}
+		\begin{cases}
+			\sum\limits^n_{j = 1} f_j \sum\limits^{\max Cap}_{s = 1} x_{j, s}\,(1 - \mathcal{N}(\mu_j, \sigma_j, s)) \rightarrow \max & \\
+			\sum\limits_{j : F_j \ni k} \sum\limits^{\max Cap}_{s = 1} x_{j, s} \leq Cap_k & \forall k \in [F] \\
+			x_{j,s + 1} - x_{j, s} \leq 0 \quad & \forall\, j \in [N],\, \forall\, s \in [Cap - 1] \\
+			x_{j, s} \geq 0 &  \forall\, j \in [N],\, \forall\, s \in [Cap] \\
+		\end{cases}
+		$$
+		
+		%%%
+		\subsection{Randomized Linear Problem (RLP).}
+		
+		$$
+		\text{(RLP)}:
+		\begin{cases}
+			f^Tx \rightarrow \max & \\
+			Ax \leq Cap & \\
+			0 \leq x \leq \mathfrak{D}_i & \\
+		\end{cases}	
+		$$
+		
+		где $\mathfrak{D}_i$ -- конкретная реализация СВ -- спроса.
+		
+		В (RLP) запускается множество экспериментов, а финальный ответ берется в виде среднего по всем решениям $x^* = \frac{1}{n}\sum\limits^n_{i = 1} {x^*}^i$, с последующим \textit{умным} округлением каждой координаты.
 		
 		
-		%%%%%
-		\newpage
-		\section{Лекция 4.}
+		%%%
+		\subsection{Demand forecasting. Naive methods.}
+		
+		На практике, с целью прогнозирования спроса, могут быть использованы исторические данные (временные ряды). Но у этого подхода есть проблема. Исторические данные о спросе являются цензурированными. Другими словами, мы можем разделить точки истроического периода на истинные и цензурированные, где истинный спрос -- весь истроические спрос, меньший предела продаж, а цензурированный -- точки, в которых количество продаж равно пределу. Это связано с тем, что мы никак не можем отследить спрос, превышающий предел продаж.
+		
+		В связи с этим возникает отдельная проблема -- оценить распределение спроса в условиях цензурированных исторических данных. Существует множество методов. Рассмотрим наивные:
+		
+		\textbf{Naive 1:} все цензурированные элементы заменить на среднее по всей выборке. Получим $\pm$ хорошее $\mu$, но плохое $\sigma$, за счет потери дисперсии.
+		
+		
+		
 		
 \end{document}
 
