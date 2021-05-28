@@ -113,6 +113,11 @@
 	urlcolor=black
 }
 
+% Line numbering
+\usepackage{lineno}
+\renewcommand\linenumberfont{\normalfont\tiny\ttfamily}
+\renewcommand{\makeLineNumber}{\llap{\linenumberfont\rlap{\LineNumber}\hspace{1cm}}}
+\linenumbers
 
 % Title
 \title{Математические модели микро- и макроэкономики.\\ Лекции.\\ ЧЕРНОВИК}
@@ -170,7 +175,7 @@
 	
 	Несмотря на это, именно вышеперечисленные 6 постулатов Калдора заложили основу развития модели Солоу.
 	
-	\subsection{Модель Солоу}
+	\subsection{Модель Солоу}\label{sec:1.3}
 	Модель Солоу -- модель экзогенного экономического роста. Она объясняет долгосрочный рост в экономике исключительно внешними факторами.
 	
 	Мы имеем выпуск, который задается неоклассической производственной функцией, зависящей от двух факторов производства (труда и капитала). 
@@ -233,6 +238,8 @@
 	\begin{equation}\label{eq:1.3.2}
 		K_{t+1} = (1 - \mu) K_t + I_t
 	\end{equation}
+
+	$(1 - \mu) K_t$ -- остатки капитала в текущем периоде
 	
 	То есть капитал в каждый следующий период времени - это тот фактор производства, на который ориентируется фирма для того чтобы производить больше выпуска.
 	
@@ -784,7 +791,7 @@
 		\end{cases}
 		$$
 		
-		Решение через Лагранжа или предельные полезности, также можно подставить в $U$ наше ограничение (со знаком равно)
+		Решение через Лагранжа или предельные полезности
 		
 	\end{exc}
 	
@@ -806,11 +813,11 @@
 		
 		$$\dfrac{MU(x)}{MU(y)} = \left( \dfrac{x}{y}\right)^{\rho-1} = \dfrac{p_x}{p_y}$$
 		
-		$$x = \left( \dfrac{y^{\rho-1} p_x}{p_y}\right)^{\dfrac{1}{\rho-1}} = y \left( \dfrac{p_x}{p_y}\right)^{\dfrac{1}{\rho-1}}$$
+		$x = \left( \dfrac{y^{\rho-1} p_x}{p_y}\right)^{\dfrac{1}{\rho-1}} = y \left( \dfrac{p_x}{p_y}\right)^{\dfrac{1}{\rho-1}}$
 		
-		$$m = p_x \left( \dfrac{p_x}{p_y}\right)^{\dfrac{1}{\rho-1}} y + p_y y$$
+		$m = p_x \left( \dfrac{p_x}{p_y}\right)^{\dfrac{1}{\rho-1}} y + p_y y$
 		
-		$$y=m \left(\dfrac{1}{p_x^{\frac{\rho}{\rho-1}} p_y^{- \frac{1}{\rho-1}} + p_y}\right)$$
+		$y=m \left(\dfrac{1}{p_x^{\frac{\rho}{\rho-1}} p_y^{- \frac{1}{\rho-1}} + p_y}\right)$
 				
 		$$y^*(p_x,p_y) = m \left( \dfrac{p_y^{\dfrac{1}{\rho-1}}}{p_x^{\dfrac{\rho}{\rho-1}}+p_y^{\dfrac{\rho}{\rho-1}}}\right)$$
 		
@@ -1049,28 +1056,728 @@
 	
 	\subsection{Равновесие на рынке}
 	
-	Фукция спроса: $q=D(p)$
+	Фукция спроса: $Q^D = D(p)$
 	
 	Потребитель хочет максимизировать свою полезность.
-	
-	$$u(x)-px \rightarrow \max$$
-	
+	$$C = u(x)-px \rightarrow \max$$
 	$u'_x = p$
 	
-	Откуда $D(p)= x$. При наборе благ $D(p)= \sum_i x_i$.\\
+	Откуда находим $x$ это и есть наша функция спроса $D(p)$. 
 	
-	Фукция предложения: $q=\cfrac{p}{c(q)}$
+	При наборе благ $D(p) = \sum_i x_i$.\\
+	
+	Фукция предложения: $Q^S = S(p)$
 	
 	Производитель хочет максимизировать свою прибыль.
+	$$\pi = pq-c(w,q) \rightarrow \max_q$$
+	$c(w,q)'_q = p$
 	
-	$$pq-c(w,q) \rightarrow \max_q$$
+	Откуда находим $q$, что определяет функцию предложения $S(p) = q$.
 	
-	$c(w,q)'_q = q$
+	При наборе благ $S(p)= \sum_i q_i$.\\
 	
-	Откуда $S(p)= q$. При наборе благ $S(p)= \sum_i q_i$.\\
+	Равновесие -- ситуация, когда $D(p)=S(p)$
 	
-	Равновесие: $D(p)$(спрос)$=S(p)$(предложению)
+	\newpage
 	
+	\section{Лекция 9.}
+	
+	\subsection{Состояние равновесия на рынках труда и товаров. Оптимальность по Парето}
+			$n$ -- продуктов $i=1,...,n$
+			
+			$m$ -- участников $j=1,...,m$
+			
+			$w^j>0$ -- запасы товаров
+			
+			\textbf{Задача}: $m$ участников обладают начальным запасом благ, предпочтения участников описаны с помощью функции полезности $u^j$, которая непрерывна, квазивогнута, монотонно возрастает. Агент продает на рынке начальный запас товаров, а после покупает, что хочет. 
+			
+			Условия совершенной конкуренции, то есть потребители не способны влиять на рыночную цену.
+			
+			\textbf{Задача потребителя:}
+			
+			$$u^j(\textbf{x}^j) \rightarrow \max$$
+			$$
+			\text{s.t.}
+			\begin{cases}
+				\textbf{px}^j \leq \textbf{pw}^j \\
+				\textbf{x}^j \geq 0
+			\end{cases}
+			$$
+			
+			Здесь в качестве дохода потребителя выступает $m^j = \textbf{pw}^j$ \\
+			
+			$E(\textbf{p}) = \sum_j(\textbf{x}^j(\textbf{p})-\textbf{w}^j)$ -- \textbf{избыточный спрос} при каких-то заданных любых положительных ценах
+		
+			\textbf{Закон Вальраса:} избыточный спрос, измеренных в ценах для конкретного продукта, равен нулю.
+			$$p E(\textbf{p}) = 0 \, \forall p > 0$$
+			При выполнении Закона Вальраса установится равновесие на рынке конкретного продукта. 
+			
+			$\exists \textbf{p}^* : \boldsymbol{E_i(p^*)=0}$, то есть существует цена равновесия при которой спрос на данный товар не превосходит предложения данного товара. Если же на рынке какого-то товара $E_i(\textbf{p}^*)<0$, то $\textbf{p}^* =0$ -- товар не является равновесным. \\
+			
+			\textbf{Состояние равновесия } $\{\textbf{p}^*, \{\textbf{x}^{*j}\}_{j=1}^m\}$ :
+			
+			1. $\textbf{x}^{*j}$ есть решение задачи:
+			
+			$$
+			\begin{cases}
+				u^j(\textbf{x}^j) \rightarrow \max \\
+				
+				\textbf{p}^*\textbf{x}^j \leq \textbf{p}^*\textbf{w}^j \\
+			\end{cases}
+			$$
+			
+			2. $\sum_j \textbf{x}^j = \sum_j \textbf{w}^j$ 
+			
+			Если $\sum_j \textbf{x}^j < \sum_j \textbf{w}^j$, то $\{\textbf{x}^{*j}\}_{j=1}^m$ -- \textbf{допустимое распределение благ} \\
+			
+			\underline{Когда найдена состояние равновесия, необходимо определить оптимально ли оно}
+			
+			\textbf{Оптимальность по Парето:}
+			
+			Допустимый набор благ $\{\textbf{x}^{*j}\}_{j=1}^m$ называется оптимальным по Парето, если не существует любого другого $\{\widehat{\textbf{x}}^{*j}\}_{j=1}^m$, обладающего свойством: $u^j(\textbf{x}^j) \geq u^j(\widehat{\textbf{x}}^j)$, при этом, хотя бы одно из неравенств выполнялось как строгое.
+			
+			\begin{thm}[\textbf{Экономики общественного благосостояния}]
+				Любое равновесное распределение благ является оптимальным по Парето
+			\end{thm}
+			
+			\subsection{Задачка}
+			
+			Рассмотрим модель с 2 товарами, 2 агентами и лог-линейной функцией полезности:
+			
+			$$u(x_1, x_2) = \alpha_1 \ln x_1 + \alpha_2 \ln x_2 \, \, \alpha_i>0, \, \alpha_1+\alpha_2=1$$
+			
+			Запасы первого агента: $w_1,w_2 > 0$
+			
+			$$v(y_1, y_2) = \beta_1 \ln y_1 + \beta_2 \ln y_2 \, \, \beta_i>0, \, \beta_1+\beta_2=1$$
+			
+			Запаса второго агента: $\vartheta_1, \vartheta_2 > 0$
+			
+			Известны какие-то цена на товары $p = (p_1,p_2)$
+			
+			Найдите цены равновесия и выпишите равновесное распределение.\\
+			
+			\textbf{Решение}
+			
+			Агент 1:
+			
+			$$u(x_1, x_2) = \alpha_1 \ln x_1 + \alpha_2 \ln x_2 \rightarrow \max_{x_1,x_2 \geq 0}$$
+			
+			$$
+			\text{s.t.}
+			\begin{cases}
+				p_1x_1+p_2x_2 \leq p_1w_1 + p_2w_2
+			\end{cases}
+			$$
+			
+			$$L(x_1,x_2,\lambda)=\alpha_1 \ln x_1 + \alpha_2 \ln x_2 - \lambda(p_1x_1+p_2x_2 - p_1w_1 - p_2w_2)$$
+			
+			$
+			\begin{cases}
+				FOC[x_1]: \cfrac{\alpha_1}{x_1} = \lambda p_1\\
+				
+				FOC[x_2]: \cfrac{\alpha_2}{x_2}  = \lambda p_2\\
+				
+				p_1x_1+p_2x_2 = p_1w_1+p_2w_2
+			\end{cases}
+			$ \\
+			
+			$\cfrac{FOC[x_1]}{FOC[x_2]}: \cfrac{\alpha_1 x_2}{\alpha_2 x_1} = \cfrac{p_1}{p_2}$
+			
+			$\alpha_1 x_2 p_2 = \alpha_2 x_1 p_1$
+			
+			$x_2 = \cfrac{\alpha_2 x_1 p_1}{\alpha_1 p_2}$ \\
+			
+			Подставим в бюджетное ограничение
+			
+			$p_1x_1+p_2 \cfrac{\alpha_2 x_1 p_1}{\alpha_1 p_2} = p_1w_1+p_2w_2$
+			
+			$x_1(\alpha_1 p_1 + \alpha_2 p_1) = \alpha_1(p_1 w_1+p_2 w_2)$
+			
+			$x_1^* = \cfrac{\alpha_1(p_1 w_1+p_2 w_2)}{p_1(\alpha_1+\alpha_2)} = \cfrac{\alpha_1}{p_1} \cdot (p_1 w_1+p_2 w_2) $
+			
+			$$
+			\begin{cases}
+				x_1^*(p_1,p_2) = \cfrac{\alpha_1}{p_1} \cdot (p_1 w_1+p_2 w_2)\\
+				
+				x_2^*(p_1,p_2) = \cfrac{\alpha_2}{p_2} \cdot (p_1 w_1+p_2 w_2)\\
+			\end{cases}
+			$$ \\
+			
+			Агент 2:
+			
+			$$v(y_1, y_2) = \beta_1 \ln y_1 + \beta_2 \ln y_2 \rightarrow \max_{y_1,y_2 \geq 0}$$
+			
+			$$
+			\text{s.t.}
+			\begin{cases}
+				p_1 y_1+p_2 y_2 \leq p_1 \vartheta_1 + p_2 \vartheta_2
+			\end{cases}
+			$$
+			
+			$$
+			\begin{cases}
+				y_1^*(p_1,p_2) = \cfrac{\beta_1}{p_1} \cdot (p_1 \vartheta_1+p_2 \vartheta_2)\\
+				
+				y_2^*(p_1,p_2) = \cfrac{\beta_2}{p_2} \cdot (p_1 \vartheta_1+p_2 \vartheta_2)\\
+			\end{cases}
+			$$
+			
+			Равновесие:
+			
+			$$
+			\begin{cases}
+				x_1(p) + y_1(p) = w_1 + \vartheta_1\\
+				
+				x_2(p) + y_2(p) = w_2 + \vartheta_2\\
+			\end{cases}
+			$$
+			
+			$
+			\begin{cases}
+				\cfrac{\alpha_1}{p_1} \cdot (p_1 w_1+p_2 w_2) + \cfrac{\beta_1}{p_1} \cdot (p_1 \vartheta_1 + p_2 \vartheta_2) = w_1 + \vartheta_1\\
+				
+				\cfrac{\alpha_2}{p_2} \cdot (p_1 w_1+p_2 w_2) + \cfrac{\beta_2}{p_2} \cdot (p_1 \vartheta_1 + p_2 \vartheta_2) = w_2 + \vartheta_2\\
+			\end{cases}
+			$
+			
+			$$\cfrac{p_2}{p_1} = \cfrac{\alpha_2 w_1 + \beta_2 \vartheta_1}{\alpha_1 w_2 + \beta_1 \vartheta_2}$$
+			
+			Найдем $x_1, x_2$:
+			
+			$$x_1^*(p_1, p_2) = \cfrac{\alpha_1}{p_1^*} \cdot (p_1^* w_1+p_2^* w_2) = \alpha_1 w_1 + \cfrac{p_2^*}{p_1^*} \, \alpha_1 w_2 = \alpha_1 w_1 + \cfrac{\alpha_2 w_1 + \beta_2 \vartheta_1}{\alpha_1 w_2 + \beta_1 \vartheta_2} \, \alpha_1 w_2$$
+			
+			$$x_2^*(p_1, p_2) = \cfrac{\alpha_2}{p_2^*} \cdot (p_1^* w_1+p_2^* w_2) =  \cfrac{\alpha_1 w_2 + \beta_1 \vartheta_2}{\alpha_2 w_1 + \beta_2 \vartheta_1}  \, \alpha_2 w_1 + \alpha_2 w_2$$
+			
+			Ответ: $\left\{\cfrac{p_2^*}{p_1^*},(x_1^*(p), x_2^*(p)),(y_1^*(p), y_2^*(p))\right\}$
+		
+			\subsection{An Infinite Period Model}
+			
+			Пусть репрезентативный агент живет $\infty$ количество периодов. Тогда функция полезности примет вид:
+			
+			$$u(c_1,c_2,...,c_n)=u(c_1)+\beta u(c_2) + \beta^2 u(c_3) + ...$$
+			
+			Репрезентативный агент решает задачу максимизации полезности на бюджетном ограничении в каждый момент времени $t$. 
+			
+			Бюджетное ограничение в каждый момент времени $(t=1,2,...)$ принимает вид: 
+			$$P c_t + b_t = P y_t + b_{t-1}(1+R)$$
+			$c_t, b_t, y_t$ -- потребление, инвестиции, доход, соответственно
+			
+			$b_{t-1}(1+R)$ -- сбережения из прошлого периода (вчера вложили $b_{t-1}$, сегодня получили с процентами $(1+R)$)
+			
+			\textbf{Задача максимизации полезности репрезентативного агента}:
+			
+			$$\max\limits_{\{c_t,b_t\}_{t=1}^\infty} \sum\limits_{t=1}^\infty \beta^{t-1} u(c_t)$$
+			
+			$$
+			\text{s.t.}
+			\begin{cases}
+				P c_t + b_t = P y_t + b_{t-1} (1+R) \, & \, \forall t \in \{1,2,...\}
+			\end{cases}
+			$$
+			
+			$$L(\{c_t, b_t, \lambda_t\}_{t=1}^\infty) = \sum\limits_{t=1}^\infty \beta^{t-1} u(c_t) - \sum\limits_{t=1}^\infty \lambda_t (P c_t + b_t - P y_t - b_{t-1}(1+R))$$
+			
+			$
+			\begin{cases}
+				FOC[c_t]: \beta^{t-1} u'(c_t)-\lambda_t p = 0 \\
+				
+				FOC[c_{t+1}]: \beta^{t} u'(c_{t+1})-\lambda_{t+1} p = 0 \\
+				
+				FOC[b_t]: -\lambda_t + \lambda_{t+1}(1+R) = 0
+			\end{cases}
+			$
+			
+			$\cfrac{\lambda_t}{\lambda_{t+1}} = (1+R)$
+			
+			$\cfrac{FOC[c_t]}{\beta FOC[c_{t+1}]} = \cfrac{\lambda_t}{\lambda_{t+1}} = 1+R$
+			
+			$FOC[c_t] = \beta FOC[c_{t+1}](1+R)$ -- Уравнение Эйлера (необходимое условие того, чтобы в задаче было решение)
+			
+			Ответ: $\left\{\{c_t\}_{t=0}^\infty, \{b_t\}_{t=0}^\infty \right\}$
+			
+			\subsection{Present-Value Budget Constraint}
+			
+			Теперь вместо того, что репрезентативный агент в каждый период времени пытается сбалансировать бюджетное ограничение, пусть агент хочет сбалансировать приведенную стоимость всего бюджета за бесконечный горизонт жизни.
+			
+			Приведенная стоимость дохода репрезентативного агента имеет вид:
+			
+			$$\sum_{t=1}^\infty \cfrac{P y_t}{(1+R)^{t-1}}$$
+			
+			-- это то количество денег, которое бы получил агент в период времени $t=1$, если бы сейчас (в $t=1$) продал права на весь свой будущий доход.
+			
+			С другой сторона, каждый период времени репрезентативный агент трати деньги на потребление:
+			
+			$$\sum_{t=1}^\infty \cfrac{P c_t}{(1+R)^{t-1}}$$
+			
+			Соответственно, его будущие расходы на потребление не могут превышать его будущих доходов, бюджетное ограничение примет вид:
+			
+			$P c_t + b_t = P y_t + b_{t-1} (1+R) \Rightarrow$
+			
+			$\sum_{t=1}^\infty \cfrac{P c_t}{(1+R)^{t-1}} = \sum_{t=1}^\infty \cfrac{P y_t}{(1+R)^{t-1}} \Rightarrow$
+			
+			 $$\sum_{t=1}^\infty \cfrac{P (c_t - y_t)}{(1+R)^{t-1}} = 0$$ \\
+			 
+			 \textbf{Задача репрезентативного агента} 
+			
+			$$\max\limits_{\{c_t\}_{t=1}^\infty} \sum\limits_{t=1}^\infty \beta^{t-1} u(c_t)$$
+			
+			$$
+			\text{s.t.}
+			\begin{cases}
+				\sum_{t=1}^\infty \cfrac{P (c_t - y_t)}{(1+R)^{t-1}} = 0
+			\end{cases}
+			$$
+			
+			$$L(\{c_t, b_t, \lambda_t\}_{t=1}^\infty) = \sum\limits_{t=1}^\infty \beta^{t-1} u(c_t) - \lambda \left(\sum_{t=1}^\infty \cfrac{P c_t}{(1+R)^{t-1}} - \sum_{t=1}^\infty \cfrac{P y_t}{(1+R)^{t-1}} \right)$$
+			
+			$
+			\begin{cases}
+				FOC[c_t]: \beta^{t-1} u'(c_t) - \lambda \cfrac{P}{(1+R)^{t-1}} =0 \\ 
+			\end{cases}
+			$
+			
+			$\cfrac{FOC[c_t]}{\beta FOC[c_{t+1}]} = (1+R)$
+			
+			$FOC[c_t] = \beta FOC[c_{t+1}](1+R)$
+			
+	\newpage
+	
+	\section{Лекция 10.}
+	
+	\subsection{Модель Солоу}
+		Повтор Лекции \ref{sec:1.3}
+		
+	\subsection{Задачка}
+	
+	1. Выпишите необходимые условия для существования оптимальной траектории в следующей модели:
+	
+	$$\max\limits_{\{c_t,l_t,k_{t+1}\}_{t=0}^\infty} \sum_{t=0}^\infty \beta^t \left(\cfrac{c_t^{1-\gamma}}{1-\gamma} - \cfrac{l_t^{1-\phi}}{1-\phi}\right)$$
+	
+	Бюджетное ограничение имеет вид:
+	
+	$$c_t = \lambda_t k_t^\theta l_t^{1-\theta} + (1-\delta)k_t - k_{t+1}$$
+	
+	где $c_t, k_t, l_t$ -- потребление, капитал, труд, соответственно 
+	
+	2. Выпишите необходимые условия для существования стационарного состояния в модели.
+	
+	\textbf{Решение}
+	
+	1. 
+	
+	$$\max\limits_{\{c_t,l_t,k_{t+1}\}_{t=0}^\infty} \sum_{t=0}^\infty \beta^t \left(\cfrac{c_t^{1-\gamma}}{1-\gamma} - \cfrac{l_t^{1-\phi}}{1-\phi}\right)$$
+	
+	$$
+	\text{s.t.}
+	\begin{cases}
+		c_t = F_t(k_t, l_t) - I_t \\ 
+		
+		k_{t+1} = (1-\delta)k_t + I_t \\
+	\end{cases}
+	$$
+	
+	$F_t(K_t, L_t)$ -- производственная функция
+	
+	$$L(c_t,l_t,k_{t+1},\mu_t) = \sum_{t=0}^\infty \beta^t \left(\cfrac{c_t^{1-\gamma}}{1-\gamma} - \cfrac{l_t^{1-\phi}}{1-\phi}\right) - \sum_{t=0}^\infty \mu_t ( c_t - \lambda_t k_t^\theta l_t^{1-\theta} - (1-\delta)k_t + k_{t+1} )$$
+	
+	$
+	\begin{cases}
+		FOC[c_t]: \, \beta^t c_t^{-\gamma} = \mu_t \\ 
+		
+		FOC[k_{t+1}]: \, - \mu_t + \mu_{t+1}\lambda_{t+1} \theta k_{t+1}^{\theta-1} l_{t+1}^{1-\theta} + \mu_{t+1}(1-\delta)  \Rightarrow \mu_t = \mu_{t+1} ( \lambda_{t+1} \theta k_{t+1}^{\theta-1} l_{t+1}^{1-\theta} + 1-\delta)\\
+		
+		FOC[l_t]: \, \beta^t l_t^{-\phi} = \mu_t (1-\theta)\lambda_t k_t^\theta l_t^{-\theta}
+	\end{cases}
+	$
+	
+	Воспользуемся тем, что $\beta^{t+1} c_{t+1}^{-\gamma} = \mu_{t+1}$ и подставим $FOC[c_t]$ в $FOC[k_{t+1}]$:
+	
+	$$c_t^{-\gamma} = \beta c_{t+1}^{-\gamma} (\lambda_{t+1} \theta k_{t+1}^{\theta-1} l_{t+1}^{1-\theta} + 1-\delta)$$
+	
+	Подставим $FOC[c_t]$ в $FOC[l_t]$:
+	
+	$$l_t^{\theta - \phi} = c_{t}^{-\gamma} (1-\theta)\lambda_t k_t^\theta$$
+	
+	Уравнения $c_t^{-\gamma}$ и $l_t^{\theta - \phi}$ - ответ на первый вопрос. Важно, чтобы в ответе не было множителей Лагранжа.
+	
+	2.
+	
+	В стационарном состоянии,
+	$c_t = c_{t+1} = c^*, \, l_t =l_{t+1} = l^*, \, k_t=k{t+1}=k^*, \, \lambda_t=\lambda_{t+1}=\lambda^*$(экзогенный рост)
+	
+	Тогда в steady state $c_t^{-\gamma}$, $l_t^{\theta - \phi}$ и бюджетное ограничение примут вид:
+	
+	$$1 = \beta(\lambda^* \theta k^{*(\theta-1)} l^{*(\theta-1)} +1 - \delta)$$
+	
+	$$(l^*)^{\theta - \phi} = (c^*)^{-\gamma}(1-\theta)\lambda^*(k^*)^\theta$$
+	
+	$$c^* = \lambda^* (k^*)^\theta (l^*)^{1-\theta}-\delta k^*$$
+	
+	Решив эту систему, можно найти все стационарные состояния: $ c^*, k^*, l^*$.
+		
+	\newpage
+	
+	\section{Лекция 11.}
+	
+	\subsection{Равновесие рынков труда и товаров}
+	$$U(C,l) \rightarrow \max_{C,l \geq 0}$$
+	$$
+	\text{s.t.} 
+	\begin{cases}
+		C \leq y \\
+		y=f(l)
+	\end{cases}
+	$$
+	
+	$C$ -- потребление и $l$--труд не могут быть равными 0, так как тогда $U' = \infty$ (по условию Инады). 
+	
+	Соответственно, не рассматриваем предельные случаи
+	
+	\textbf{Решение 1:}
+	
+	$L(C,l,\lambda)=U(C,l)-\lambda(C-f(l))$
+	
+	$\lambda$ -- предельная полезность от потребления
+	
+	$
+	\begin{cases}
+		FOC[C]: \, U'_C(C,l)=\lambda \\
+		FOC[l]: \, U(C,l)+\lambda f'(l) = 0 \\
+		C=f(l)
+	\end{cases}
+	$
+	
+	Соединяя две производных получим 
+	
+	$U'_C(C,l)=-\cfrac{U'_l(C,l)}{f'(l)}$
+	
+	-- при увеличении потребления нам приходится увеличивать выпуск, а значит больше работать, что отрицательно сказывается на нашей функции полезности
+	
+	\textbf{Решение 2:}
+	
+	Можно перейти от труда $l$ к отдыху $(1-l) \, \Rightarrow$
+	
+	$L(C,l,\lambda)=U(C,1-l)-\lambda(C-f(l))$
+	
+	$
+	\begin{cases}
+		FOC[C]=U'_C(C,1-l)=\lambda \\
+		FOC[l]=-U(C,1-l)+\lambda f'(l) = 0 \\
+		C=f(l)
+	\end{cases}
+	$
+	
+	Тогда получим 
+	
+	$U'_C(C,1-l)=\cfrac{U'_l(C,1-l)}{f'(l)}$
+	
+	-- мы одновременно пытаемся максимизировать и потребление, и отдых 
+		
+	\begin{itemize}
+		\item Решением этой задачи (задачи потребителя) будут оптимальные $C^*$ и $l^*$.
+		
+		\item Дальше решается задача производителя
+		$$\pi \rightarrow \max$$
+		
+		Таким образом можно найти $l^*$. Откуда узнаем $y^*$.
+		
+		\item Равновесием будем называть ситуация "очищения" рынков, то есть
+		
+		$
+		\begin{cases}
+			l(1-l)=1\\
+			C=y
+		\end{cases}
+		$ 
+		
+		Что происходит только в оптимуме $(C^*, l^*, y^*)$
+	\end{itemize}
+	 	
+	\subsection{Пример}
+	
+	$$U(C,l) = C^\gamma (1-l)^{1-\gamma} \rightarrow \max\limits_{C,l \geq 0}$$
+	
+	$
+	\text{s.t.} 
+	\begin{cases}
+		c \leq y \\
+		y=Al^\alpha \\
+		l+(1-l)=1 \\
+		0<\gamma<1
+	\end{cases}
+	$
+	
+	$$L(C,l,\lambda) = \gamma C^{\gamma - 1} (1-l)^{1-\gamma} - \lambda(C-Al^\alpha)$$
+	
+	$
+	\begin{cases}
+		FOC[C]=\gamma C^{\gamma - 1}(1 - l)^{1-\gamma} = \lambda \\
+		FOC[l]=-(1-\gamma)C^\gamma (1-l)^{-\gamma} = -\lambda \alpha Al^{\alpha -1} \\
+		C = Al^\alpha
+	\end{cases}
+	$
+	
+	$\cfrac{\gamma}{1-\gamma} \cdot \cfrac{1-l}{C} = \cfrac{1}{\alpha A l^{\alpha - 1}}$
+	
+	$\gamma \alpha A l^{\alpha-1}(1-l)=(1-\gamma)C$
+	
+	$\gamma \alpha A l^{\alpha-1}(1-l)=(1-\gamma)Al^\alpha$
+	
+	$\gamma \alpha A (1-l^*)=(1-\gamma)Al^*$
+	
+	\newpage
+	
+	\section{Лекция 12.}
+	
+	\subsection{Задачка}
+	
+	$$\max_{\{c_t,n_t\}^\infty_{t=0}} \sum_{t=0}^\infty \beta^t U(c_t, n_t)$$
+	
+	$
+	\begin{cases}
+		U(c_t, n_t) = \cfrac{c_t^{1-\gamma}-1}{1-\gamma} - \cfrac{\eta}{2} \, n_t^2 & \\ 
+		c_t \geq 0 & \forall t \\ 
+		n_t \geq 0 & \forall t \\ 
+		k_{t+1} \geq 0 & \forall t \\ 
+		y_t = F(k_t,n_t)=k_t^\alpha n_t^{1-\alpha} & \\
+	\end{cases}
+	$
+	
+	$$L(c_t,n_t,k_{t+1},\lambda_t,\mu_{1_t}, \mu_{2_t},\mu_{3_t})=\sum_{t=0}^\infty \beta^t \left( \cfrac{c_t^{1-\gamma}-1}{1-\gamma} - \cfrac{\eta}{2} \, n_t^2 \right) - \sum_{t=0}^\infty \lambda_t (c_t + k_{t+1} - k_t^\alpha n_t^{1-\alpha} - (1-\delta)k_t) + \sum_{t=0}^\infty \mu_{1_t} c_t + \sum_{t=0}^\infty \mu_{2_t} n_t + \sum_{t=0}^\infty \mu_{3_t} k_{t+1} $$
+	
+	Dсе факторы не могут быть равны 0. Так как 
+	
+	* если $n_t = 0$, то выпуск равен нулю; 
+	
+	* если $c_t=0$, то предел полезности = бесконечности (условие Инады);
+	
+	* если $k_{t+1}=0$, то мы не заботимся о будущем поколении
+	
+	Тогда: 
+	$$L(c_t,n_t,k_{t+1},\lambda_t)=\sum_{t=0}^\infty \beta^t \left( \cfrac{c_t^{1-\gamma}-1}{1-\gamma} - \cfrac{\eta}{2} \, n_t^2 \right) - \sum_{t=0}^\infty \lambda_t (c_t + k_{t+1} - k_t^\alpha n_t^{1-\alpha} - (1-\delta)k_t)$$
+	
+	$
+	\begin{cases}
+		FOC[c_t]: \beta^t \cdot \cfrac{(1-\gamma) c_t ^{-\gamma}}{1-\gamma}=\lambda_t \Rightarrow \beta^t c_t^{-\gamma}=\lambda_t\\
+		
+		FOC[n_t]: -\eta n_t = -\lambda_t (1-\alpha)k_t^\alpha n_t^{-\alpha} \\
+		
+		FOC[k_{t+1}]: -\lambda_t+\lambda_{t+1} \alpha k_{t+1}^{\alpha-1} n_{t+1}^{1-\alpha} + (1-\delta)\lambda_{t+1} = 0\\
+		
+		c_t = k_t^\alpha n_t^{1-\alpha} + (1-\delta)k_t - k_{t+1} \\
+	\end{cases}
+	$ \\ 
+	
+	Варианты вопросов к задаче:
+	
+	(1) Найти решение задачи в виде рекуррентных функций: $\{c_t,n_t,k_{t+1}\}^\infty_{t=0}$ 
+	
+	(2) Найти стационарное состояние: $\{c^*,n^*,k^*\}$
+	
+	(3) Написать условие того, что существует решение задачи, и оно единственное:
+	
+	\begin{itemize}
+		\item TVC (Transversality condition) $\lim\limits_{T \rightarrow \infty} \beta^T U'(c_t) k_{T+1}=0$
+		
+		\item уравнение Эйлера (характеризующее межвременное потребление): $\cfrac{FOC[c_t]}{FOC[c_{t+1}]}$, где из $FOC[k_{t+1}]$ нужно найти $\cfrac{\lambda_t}{\lambda_{t+1}}$ и подставить
+	\end{itemize}
+	
+		\newpage
+	
+	\section{Лекция 13.}
+	
+	\subsection{Задачка 1}
+	
+	Задача потребителя
+	
+	$$\ln C_t + \ln n_t \rightarrow \max\limits_{C_t,n_t}$$
+	
+	$$
+	\text{s.t.}
+	\begin{cases}
+		p n_t + C_t \leq w_t \\
+	\end{cases}
+	$$
+	
+	$$\ln (w_t + p n_t) + \ln n_t \rightarrow \max\limits_{C_t,n_t}$$
+	
+	$FOC[n_t] = -\cfrac{p}{w_t - p n_t} + \cfrac{1}{n_t}=0$
+	
+	$n_t^* = \cfrac{w_t}{2p}$
+	
+	Задача производителя
+	
+	$$A_t l_t^\alpha - w_t l_t \rightarrow \max\limits_{l_t}$$
+	
+	$FOC[l_t] = A_t \alpha l_t^{\alpha-1}=w_t$
+	
+	Соединяем
+	
+	$n_t^* = \cfrac{w_t}{2p} = \cfrac{A_t \alpha l_t^{\alpha-1}}{2p}$
+	
+	Задача 1.2
+	
+	$\cfrac{l_{t+1}}{l_t} = \cfrac{A_t \alpha l_t^{\alpha -1}}{2p}$
+	
+	$l_{t+1} = \cfrac{A_t \alpha l_t^{\alpha}}{2p}$
+	
+	Задача 1.3
+	
+	Равновесие:
+	
+	такое распределение $\{C_t,n_t,l_t,y_t\}$ и такой набор цен $\{p, w_t\}$:
+	
+	1) при заданных ценах $(p, w_t)$ 
+	
+	$\{C_t,n_t\}$ - решение задачи потребителя
+	
+	2) при заданных ценах и известном 
+	
+	$\{l_t,y_t\}$- решение задачи производителя
+	
+	3) рынки очищаются:
+	
+	* рынки благ:
+	
+	$C_t + n_t \leq y_t \, \forall t$
+	
+	* рынок труда:
+	
+	$l_t = 1$ \\ 
+	
+	\subsection{Задачка 2}
+	
+	Равновесие:
+	
+	оптимальное распределение благ $\{c_t^1, c_t^2\}_{t=0}^\infty$ и цены $\{p_t\}_{t=0}^\infty$
+	
+	(1) каждый из агентов решает задачу максимизации полезности на бюджетном ограничении 
+	
+	$\{c_t^i\}_{t=0}^\infty $- решение задачи i-го потребителя при заданных ценах
+	
+	$$\sum_{t=0}^\infty \beta^t \log c_t^i \rightarrow \max\limits_{\{c_t^i\}_{t=0}^\infty}$$
+	
+	$$
+	\text{s.t.}
+	\begin{cases}
+		\sum_{t=0}^\infty p_t c_t^i \leq \sum_{t=0}^\infty p_t w_t^i \\
+		
+		c_t^i \geq 0 \\ 
+		
+		\sum_{t=0}^\infty w_t^i > 0 \\
+	\end{cases}
+	$$	
+	
+	(2) Рынки очищаются:
+	
+	$c_t^1 + c_t^2 = w_t^1 + w_t^2 \, \forall t$
+	
+	Решение задачи:
+	
+	$$L(c_t, \lambda) = \sum_{t=0}^\infty \beta^t \log c_t^i - \lambda^i \left( \sum\limits_{t=0}^\infty p_t c_t^i - \sum\limits_{t=0}^\infty p_t w_t^i \right)$$
+	
+	$FOC[c_t^i] = \beta^t \cdot \cfrac{1}{c_t^i} = \lambda^i p_t$
+	
+	$\Rightarrow$
+	
+	$(c_t^1): \beta^t \cdot \cfrac{1}{c_t^1} = \lambda^1 p_t$
+	
+	$(c_t^2): \beta^t \cdot \cfrac{1}{c_t^2} = \lambda^2 p_t$
+	
+	Уравнение Эйлера:
+	
+	$\cfrac{\beta^{t+1}}{c_{t+1}^1}=\lambda^1 p_{t+1}$
+	
+	$\cfrac{\beta^{t+1} c_{t}^1}{c_{t+1}^1 \beta^t}=\cfrac{\lambda^1 p_{t+1}}{\lambda^1 p_{t}}$
+	
+	$\beta c_{t}^1 p_t=c_{t+1}^1 p_{t+1}$
+	
+	$c_{t+1}^1 = \beta c_{t}^1 \cfrac{p_t}{p_{t+1}}$
+	
+	$\forall t$
+	
+	$\cfrac{1}{c_0^1}=\lambda^1 p_0$
+	
+	$\cfrac{1}{c_0^2}=\lambda^2 p_0$
+	
+	Откуда:
+	
+	$\lambda^1 = \cfrac{1}{c_0^1 p_0}$
+	
+	$\lambda^2 = \cfrac{1}{c_0^2 p_0}$
+	
+	$\forall t$
+	
+	$\cfrac{\beta^t}{c_t^1}=\cfrac{1}{c_0^1 p_0} p_t \Rightarrow c_t^1 p_t = \beta^t c_0^1 p_0 \Rightarrow c_t^1 = \beta^t c_0^1 \cfrac{p_0}{p_t}$
+	
+	$
+	\begin{cases}
+		c_t^1 =  \beta^t c_0^1 \cfrac{p_0}{p_t}\\
+		
+		c_t^2 =  \beta^t c_0^2 \cfrac{p_0}{p_t}\\
+	\end{cases}
+	$
+	
+	Равновесное значение $c_t^1, c_t^2$:
+	
+	$c_t^1 + c_t^2 = w_t^1 + w_t^2$
+	
+	$\beta^t c_0^1 \cfrac{p_0}{p_t} + \beta^t c_0^2 \cfrac{p_0}{p_t} = 6$
+	
+	так как $w_t^1=(5,1,5,1...);w_t^2=(1,5,1,5...)$, а сумма всегда 6
+	
+	$\beta^t \cfrac{p_0}{p_t}(c_0^1 + c_0^2) =6$
+	
+	Для $t=0\, c_0^1 + c_0^2 = w_0^1 + w_0^2 \Rightarrow c_0^1 + c_0^2 = 6 \Rightarrow$
+		
+	$\beta^t \cfrac{p_0}{p_t} = 1$
+	
+	$p_t^* = \beta^t p_0$
+	
+	$c_t^1 = \beta^t c_0 $
+	
+	***
+	
+	В равновесии:
+	
+	$c_t^1 = c_t^0 \Rightarrow $
+	
+	$c_0^1=c_t^1 \Rightarrow \{c_0^1\}_{t=0}^\infty$
+	
+	$c_0^2=c_t^2 \Rightarrow \{c_0^2\}_{t=0}^\infty$
+	
+	Как найти $c_0^1; \, c_0^2$
+	
+	$\forall c+0^1:$ Выпишем его бюджетное ограничение
+	
+	$\sum_{t=0}^\infty p_t c_t^1 \leq \sum_{t=0}^\infty p_t w_t^1$
+	
+	$\sum_{t=0}^\infty \beta^t p_0 c_t^1 \leq \sum_{t=0}^\infty \beta^t p_0 w_t^1$
+	
+	$c_0^1 \sum_{t=0}^\infty \beta^t = \sum_{t=0}^\infty \beta^t w_t^1$
+	
+	$c_0 \cdot \cfrac{1}{1-\beta} = \sum_{t=0}^\infty \beta^t w_t^1 = 5 + \beta + 5 \beta^2 + \beta^3 + 5 \beta^4 ... = 5(1+\beta^2+\beta^4) + \beta(1+\beta^2+...) = \cfrac{5}{1-\beta^2}+\cfrac{\beta}{1-\beta^2} = \cfrac{5+\beta}{1-\beta^2}\Rightarrow \cfrac{c_0}{1-\beta} = \cfrac{5+\beta}{1-\beta^2} $
+	
+	$c_0^1 = \cfrac{5+\beta}{1+\beta}$ --равновесное значение потребления 
+	
+	\subsection{Задачка 3}
+	
+	$$u(c_1)+\beta u(c_2) \rightarrow \max\limits_{c_1,c_2,\beta_1}$$
+	
+	$
+	\text{s.t.}
+	\begin{cases}
+		p c_1 + b_1 = p y_1\\
+		
+		p c_2 = p y_2 + b_1 (1+r)\\
+		
+		c_1, \, c_2 \geq 0\\
+	\end{cases}
+	$
+	
+	
+	
+		
 \end{document}
 
 
